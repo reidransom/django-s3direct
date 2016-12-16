@@ -40,6 +40,7 @@
       var xml = new DOMParser().parseFromString(text, 'text/xml'),
           tag = xml.getElementsByTagName('Location')[0],
           url = tag.childNodes[0].nodeValue
+      url = url.replace(/%2F/g, '/')
 
       return url
     }
@@ -86,7 +87,7 @@
 
         el.className = 's3direct link-active'
         el.querySelector('.bar').style.width = '0%'
-        // finished callback here
+        onUploaded(url.value)
     }
 
     var concurrentUploads = 0
@@ -190,6 +191,8 @@
       input.addEventListener('change', getUploadURL, false)
     }
 
+    options = options || {}
+    var onUploaded = options.onUploaded || function() {}
     addHandlers(el)
 
   }
