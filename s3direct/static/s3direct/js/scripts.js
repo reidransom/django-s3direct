@@ -192,7 +192,13 @@
     }
 
     options = options || {}
-    var onUploaded = options.onUploaded || function() {}
+    var onUploaded
+    if (options.hasOwnProperty('onUploaded')) {
+      onUploaded = options.onUploaded
+    }
+    else {
+      onUploaded = function() {};
+    }
     addHandlers(el)
 
   }
